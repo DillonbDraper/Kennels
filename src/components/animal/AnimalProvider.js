@@ -15,7 +15,7 @@ export const AnimalProvider = (props) => {
   // useState returns [initial value of state variable, a function to set the value of the state variable]
 
   const getAnimals = () => {
-    return fetch("http://localhost:8088/locations")
+    return fetch("http://localhost:8088/animals")
       .then(res => res.json())
       .then(setAnimals)
       // .then(parsedLocations => setLocations(parsedLocations))
