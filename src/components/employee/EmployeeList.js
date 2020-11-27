@@ -1,12 +1,16 @@
 import React, { useContext, useEffect } from "react"
+import { AnimalContext } from "../animal/AnimalProvider"
+import { LocationContext } from "../location/LocationProvider"
 import { Employee } from "./Employee"
 import { EmployeeContext } from "./EmployeeProvider"
 
 
 
-export const EmployeeList = () => {
+export const EmployeeList = (props) => {
   // This state changes when `getLocations()` is invoked below
   const { employees, getEmployees } = useContext(EmployeeContext)
+  const { animals, getAnimals } = useContext(AnimalContext)
+  const { locations, getLocations } = useContext(LocationContext)
 
   /*
         What's the effect this is reponding to? Component was
@@ -15,23 +19,25 @@ export const EmployeeList = () => {
     */
   useEffect(
     () => {
-      getEmployees()
+      getEmployees().then(getAnimals).then(getLocations)
     },
     []
   )
 
-  /*
-        This effect is solely for learning purposes. The effect
-        it is responding to is that the location state changed.
-    */
-  useEffect(() => {
-  }, [employees])
-
+ 
   return (
     <div className="employees">
-      {
-        employees.map(emp => <Employee key={emp.id} employee={emp} />)
-      }
+        <h1>Employees</h1>
+        <button onClick={() => props.history.push("/employees/create")}>
+            Add Employee
+        </button>
+        <article className="employeeList">
+            {
+            employees.map(employee =>  <Employee key={employee.id} employee={employee} />
+            )}
+            
+
+        </article>
     </div>
-  )
+)
 }
