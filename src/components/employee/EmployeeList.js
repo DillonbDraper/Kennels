@@ -19,25 +19,33 @@ export const EmployeeList = (props) => {
     */
   useEffect(
     () => {
-      getEmployees().then(getAnimals).then(getLocations)
+      getAnimals().then(getLocations).then(getEmployees)
+      .then(() => {
+      })
     },
     []
   )
 
- 
+
   return (
     <div className="employees">
-        <h1>Employees</h1>
-        <button onClick={() => props.history.push("/employees/create")}>
-            Add Employee
+      <h1>Employees</h1>
+      <button onClick={() => props.history.push("/employees/create")}>
+        Add Employee
         </button>
-        <article className="employeeList">
-            {
-            employees.map(employee =>  <Employee key={employee.id} employee={employee} />
-            )}
-            
+      <article className="employeeList">
+        {
+          employees.map(employee => {
+            const animal = animals.find(ani => ani.id === employee.animalId)
+            const location = locations.find(loc => loc.id === employee.locationId)
 
-        </article>
+            return <Employee key={employee.id} employee={employee} animal={animal} location={location} />
+          }
+          )
+        }
+
+
+      </article>
     </div>
-)
+  )
 }
