@@ -15,14 +15,14 @@ export const CustomerProvider = (props) => {
   // useState returns [initial value of state variable, a function to set the value of the state variable]
 
   const getCustomers = () => {
-    return fetch("http://localhost:8088/locations")
+    return fetch("http://localhost:8088/customers")
       .then(res => res.json())
       .then(setCustomers)
       // .then(parsedLocations => setLocations(parsedLocations))
   }
 
   const addCustomer = customer => {
-    return fetch("http://localhost:8088/animals", {
+    return fetch("http://localhost:8088/customers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

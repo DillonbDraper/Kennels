@@ -6,7 +6,7 @@ import { CustomerContext } from "../customer/CustomerProvider"
 
 
 
-export const AnimalList = () => {
+export const AnimalList = (props) => {
     const { animals, getAnimals } = useContext(AnimalContext)
     const { locations, getLocations } = useContext(LocationContext)
     const { customers, getCustomers } = useContext(CustomerContext)
@@ -32,7 +32,7 @@ export const AnimalList = () => {
         animals.map(animal => {
             const owner = customers.find(c => c.id === animal.customerId)
             const clinic = locations.find(l => l.id === animal.locationId)
-            console.log(clinic)
+            console.log(owner)
         
             return <Animal key={animal.id}
                         location={clinic}
@@ -40,6 +40,9 @@ export const AnimalList = () => {
                         animal={animal} />
         })
       }
+      <button onClick={() => props.history.push("/animals/create")}>
+        Make Appointment
+      </button>
     </div>
   )
 }
