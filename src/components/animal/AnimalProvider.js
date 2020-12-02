@@ -12,6 +12,7 @@ export const AnimalContext = React.createContext()
 export const AnimalProvider = (props) => {
 
   const [animals, setAnimals] = useState([]) 
+  const [ searchTerms, setTerms ] = useState("")
   // useState returns [initial value of state variable, a function to set the value of the state variable]
 
   const getAnimals = () => {
@@ -32,6 +33,11 @@ export const AnimalProvider = (props) => {
       .then(getAnimals)
   }
 
+  const getAnimalById = (id) => {
+    return fetch(`http://localhost:8088/animals/${ id }?_expand=location&_expand=customer`)
+        .then(res => res.json())
+}
+
   /*
       You return a context provider which has the
       `locations` state, the `addLocation` function,
@@ -41,7 +47,7 @@ export const AnimalProvider = (props) => {
   return (
     <AnimalContext.Provider value={
       {
-      animals, addAnimal, getAnimals
+      animals, addAnimal, getAnimals, getAnimalById, searchTerms, setTerms
       }
     }>
       {props.children}
