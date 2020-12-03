@@ -45,6 +45,17 @@ export const AnimalProvider = (props) => {
         .then(res => res.json())
 }
 
+const updateAnimal = animal => {
+  return fetch(`http://localhost:8088/animals/${animal.id}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(animal)
+  })
+      .then(getAnimals)
+}
+
   /*
       You return a context provider which has the
       `locations` state, the `addLocation` function,
@@ -54,7 +65,7 @@ export const AnimalProvider = (props) => {
   return (
     <AnimalContext.Provider value={
       {
-      animals, releaseAnimal, addAnimal, getAnimals, getAnimalById, searchTerms, setTerms
+      animals, releaseAnimal, addAnimal, getAnimals, getAnimalById, searchTerms, setTerms, updateAnimal
       }
     }>
       {props.children}

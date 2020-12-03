@@ -35,7 +35,7 @@ export const ApplicationViews = (props) => {
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
-        
+
                         {
                             <Route exact path="/animals/create" render={
                                 props => <AnimalForm {...props} />
@@ -43,7 +43,10 @@ export const ApplicationViews = (props) => {
                         }
 
                         <Route path="/animals/:animalId(\d+)" render={
-                            props => <AnimalDetail {...props} />
+                            props => <AnimalDetail {...props} />} />
+
+                        <Route path="/animals/edit/:animalId(\d+)" render={
+                            props => <AnimalForm {...props} />
                         } />
 
                         <Route exact path="/animals" render={

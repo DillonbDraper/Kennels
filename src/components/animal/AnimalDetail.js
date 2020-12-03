@@ -8,7 +8,7 @@ export const AnimalDetail = (props) => {
     const [animal, setAnimal] = useState({ location: {}, customer: {}})
 
     useEffect(() => {
-        const animalId = parseInt(props.match.params.animalId)
+        const animalId = props.match.params.animalId
         getAnimalById(animalId)
             .then(setAnimal)
     }, [])
@@ -19,6 +19,7 @@ export const AnimalDetail = (props) => {
             <div className="animal__breed">{animal.breed}</div>
             <div className="animal__location">Location: {animal.location.name}</div>
             <div className="animal__owner">Customer: {animal.customer.name}</div>
+            <div clasName="animal__treatment">Treatments: {animal.treatment}</div>
             <button onClick={
                 () => {
                     releaseAnimal(animal.id)
